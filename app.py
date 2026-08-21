@@ -295,58 +295,39 @@ st.markdown("""
         padding: 8px !important;
     }
 
-    /* Sembunyikan elemen default streamlit */
+    /* Sembunyikan elemen default streamlit (kecuali header agar tombol panah muncul) */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
+   
     .block-container {
         padding-top: 24px !important;
         padding-bottom: 24px !important;
         max-width: 1200px !important;
     }
 
-    /* Tombol toggle sidebar */
-    .toggle-sidebar-btn {
-        position: fixed;
-        top: 14px;
-        left: 14px;
-        z-index: 9999;
-        background: #2e7d32;
-        color: white !important;
-        border: none;
-        border-radius: 10px;
-        padding: 8px 14px;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        transition: background 0.2s ease;
-        line-height: 1;
+    /* Buat background header menjadi transparan agar menyatu dengan background */
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
     }
-    .toggle-sidebar-btn:hover {
-        background: #1b5e20;
-    }
-</style>
-""", unsafe_allow_html=True)
 
-# ── Paksa Sidebar Selalu Tampil ────────────────────────────────
-st.markdown("""
-<style>
-    /* Sidebar selalu tampil, tombol collapse disembunyikan */
-    [data-testid="stSidebar"] {
-        display: block !important;
-        visibility: visible !important;
-        transform: none !important;
-        width: 280px !important;
-        min-width: 280px !important;
-    }
-    [data-testid="stSidebarCollapsedControl"] {
-        display: none !important;
-    }
+    /* Tombol panah toggle sidebar jadi HITAM dan dipaksa tampil 100% (tidak transparan) */
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapsedControl"],
     [data-testid="stSidebarCollapseButton"] {
-        display: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
-    section[data-testid="stSidebar"] > div {
-        width: 280px !important;
+
+    /* Targetkan semua elemen gambar panahnya agar full hitam */
+    [data-testid="collapsedControl"] svg,
+    [data-testid="stSidebarCollapsedControl"] svg,
+    [data-testid="stSidebarCollapseButton"] svg,
+    [data-testid="collapsedControl"] svg path,
+    [data-testid="stSidebarCollapsedControl"] svg path,
+    [data-testid="stSidebarCollapseButton"] svg path {
+        color: #000000 !important;
+        fill: #000000 !important;
+        stroke: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
